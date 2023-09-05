@@ -32,9 +32,10 @@ namespace API.Controllers
 
 
         [HttpGet]
-        public async Task <ActionResult<IReadOnlyList<ProductToReturnDto>>>Getproducts ()
+        public async Task <ActionResult<IReadOnlyList<ProductToReturnDto>>>Getproducts (
+         [FromQuery]ProductSpecParams productParams)
         {
-            var spec = new ProductWithTypesAndBrandSpecification();
+            var spec = new ProductWithTypesAndBrandSpecification(productParams);
             
             var products = await _productsRepo.ListAsync(spec);
             
